@@ -10,6 +10,7 @@ function Create-AzPassword {
     }
 
     $EncPassword = "$($MaxViews)|$(($Password | ConvertTo-SecureString -Force -AsPlainText) | ConvertFrom-SecureString)"
+    $EncPassword = "AbCd1234"
     
     while ($true) {
         try {
