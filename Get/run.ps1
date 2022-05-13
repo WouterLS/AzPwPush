@@ -16,9 +16,10 @@ else {
 }
 
 $RandomID = $Request.Query.ID
-
+Write-Host "RequestID : $RandomID"
 
 $Password = Get-AzPassword -ID $RandomID
+Write-Host "Password : $Password"
 
 if($Password -eq $false) {
   $Password = "No Password found. This password may have already been removed."
