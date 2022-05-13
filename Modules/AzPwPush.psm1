@@ -40,6 +40,7 @@ function Delete-AzPassword {
 
 function Get-AzPassword {
     param($ID)
+    [Byte[]] $key = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
 
     try 
     {
@@ -55,7 +56,7 @@ function Get-AzPassword {
             "$($MaxViews - 1)|$($EncPassword)" | Out-File -FilePath "PasswordFile_$($ID)"
         }
 
-        $Password = [System.Net.NetworkCredential]::new("", ($EncPassword | ConvertTo-SecureString)).Password
+        $Password = [System.Net.NetworkCredential]::new("", ($EncPassword | ConvertTo-SecureString -Key $key)).Password
     }
     catch {
         $Password = $false
