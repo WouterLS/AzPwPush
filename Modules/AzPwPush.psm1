@@ -13,13 +13,15 @@ function Cleanup-AzPasswords {
 
 function Create-AzPassword {
     param($Password, $MaxViews = 0)
+    
+    [Byte[]] $key = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
 
     if ([string]::IsNullOrEmpty($Password)) {
         $Password = Generate-AzPassword
     }
 
     WriteToLogFile("Password is : $Password")
-    $EncPassword = "$($MaxViews)|$(($Password | ConvertTo-SecureString -Force -AsPlainText) | ConvertFrom-SecureString)"
+    $EncPassword = "$($MaxViews)|$(($Password | ConvertTo-SecureString -Force -AsPlainText) | ConvertFrom-SecureString -Key $key)"
     WriteToLogFile("Encoded string is : $EncPassword")
     
     while ($true) {
