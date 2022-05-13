@@ -1,12 +1,3 @@
-function WriteToLogFile ($message)
-
-{
-    $logfilepath="Log.txt"
-    $message +" - "+ (Get-Date).ToString() >> $logfilepath
-}
-
-
-
 function Cleanup-AzPasswords {
     Get-Item "PasswordFile_*" | ForEach-Object {If($_.LastWriteTime -lt (get-date).AddDays(-$ENV:MaximumPasswordAge)){ Remove-Item $_.FullName -Force } }
 }
@@ -20,10 +11,8 @@ function Create-AzPassword {
         $Password = Generate-AzPassword
     }
 
-    WriteToLogFile("Password is : $Password")
     $EncPassword = "$($MaxViews)|$(($Password | ConvertTo-SecureString -Force -AsPlainText) | ConvertFrom-SecureString -Key $key)"
-    WriteToLogFile("Encoded string is : $EncPassword")
-    
+   
     while ($true) {
         try {
             $bytes = new-object 'System.Byte[]' (200/8)
