@@ -9,7 +9,7 @@ Import-Module .\Modules\AzPwPush.psm1
 Write-Host "PowerShell HTTP trigger function processed a request."
 
 $MaxViews = $Request.Query.MaxViews -as [int]
-$Password = $Request.Query.Password
+$Password = $Request.Query.password
 
 $ParsedQueryString = [System.Web.HttpUtility]::ParseQueryString($Request.Body)
 
